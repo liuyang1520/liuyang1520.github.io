@@ -46,7 +46,7 @@ Use a unique permalink with a trailing slash. Existing post URLs, including `/jq
 
 ## Publishing
 
-The source and GitHub Pages deployment live together in [liuyang1520/liuyang1520.github.io](https://github.com/liuyang1520/liuyang1520.github.io). Push content changes to `master` to build, run the privacy and browser checks, and automatically deploy the tested `dist/` output. Pull requests only run the checks.
+The source and GitHub Pages deployment live together in [liuyang1520/liuyang1520.github.io](https://github.com/liuyang1520/liuyang1520.github.io). Push content changes to `main` to build, run the privacy and browser checks, and automatically deploy the tested `dist/` output. Pull requests only run the checks.
 
 In Settings → Pages, the publishing source is **GitHub Actions**. Deployment uses GitHub's built-in workflow token; no deploy key or personal token is required. Generated files stay out of the source branch.
 
