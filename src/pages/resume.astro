@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import Experience from '../components/Experience.astro';
+import Icon from '../components/Icon.astro';
+import { profile } from '../data/profile';
+---
+<Base title="Resume" active="Resume" description="Marvin Liu’s experience: Amplitude, Salesforce, Amazon, Cisco Systems, and Splice Software.">
+  <header class="page-heading"><h1>Resume<span class="title-period">.</span></h1></header>
+  <section class="resume-section" aria-labelledby="experience-title"><div class="section-heading"><h2 id="experience-title">Experience</h2></div><Experience /></section>
+  <div class="resume-contact"><a class="text-link" href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn<Icon name="external" size={16} /></a><a class="text-link" href={`mailto:${profile.email}`}>Email<Icon name="arrow" size={16} /></a></div>
+</Base>

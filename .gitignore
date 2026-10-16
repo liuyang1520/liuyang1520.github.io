@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+playwright-report/
+test-results/
+
+# Local personal documents and credentials must never be committed.
+/private/
+/Marvin_Liu_Resume.pdf
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx

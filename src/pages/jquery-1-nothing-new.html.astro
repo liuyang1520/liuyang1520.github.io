@@ -1,0 +1,7 @@
+---
+import { getPosts } from '../posts';
+import Post from '../layouts/Post.astro';
+const post = (await getPosts()).find(entry => entry.data.permalink === '/jquery-1-nothing-new.html');
+if (!post) throw new Error('Missing original jQuery post');
+---
+<Post post={post} />

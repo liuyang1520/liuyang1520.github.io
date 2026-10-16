@@ -1,0 +1,21 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../data/projects';
+interface Props { projects: Project[]; compact?: boolean }
+const { projects, compact = false } = Astro.props;
+const Heading = compact ? 'h3' : 'h2';
+---
+<ul class:list={['project-list', { compact }]}>
+  {projects.map(project => (
+    <li class="project-item" data-category={project.category}>
+      <span class:list={['project-icon', `project-${project.icon}`, { 'has-logo': project.logo }]} aria-hidden="true">
+        {project.logo ? <img src={project.logo} width="48" height="48" alt="" loading="lazy" decoding="async" /> : <Icon name={project.icon} size={22} />}
+      </span>
+      <div class="project-body">
+        <Heading><a href={project.url ?? `https://github.com/liuyang1520/${project.repository}`} target="_blank" rel="noreferrer">{project.name}<Icon name="external" size={16} /></a></Heading>
+        <p>{project.description}</p>
+        {!compact && <div class="project-meta"><span>{project.technology}</span>{project.repository && <a href={`https://github.com/liuyang1520/${project.repository}`} target="_blank" rel="noreferrer" aria-label={`${project.name} source on GitHub`}>Source<Icon name="external" size={13} /></a>}</div>}
+      </div>
+    </li>
+  ))}
+</ul>

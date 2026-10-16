@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { profile } from '../data/profile';
+---
+<Base title="About" active="About" description="Yang (Marvin) Liu, software engineer. Professional experience and projects.">
+  <header class="page-heading"><h1>About<span class="title-period">.</span></h1></header>
+  <div class="prose about-prose"><p>I’m Yang (Marvin) Liu, a software engineer.</p><p>I’m a Staff Engineer at Amplitude. Before that, I worked at Salesforce, Amazon, Cisco Systems, and Splice Software.</p><p>My <a href="/projects/">projects</a> include browser extensions, language-learning apps, developer tools, and games.</p></div>
+  <a class="text-link" href={`mailto:${profile.email}`}>Email<Icon name="arrow" size={16} /></a>
+</Base>

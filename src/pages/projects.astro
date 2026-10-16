@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectList from '../components/ProjectList.astro';
+import { projects } from '../data/projects';
+const categories = ['All projects', 'Apps', 'Developer tools', 'Games'];
+---
+<Base title="Projects" active="Projects" description="Projects by Marvin Liu: web apps, browser extensions, developer tools, and games.">
+  <header class="page-heading"><h1>Projects<span class="title-period">.</span></h1></header>
+  <div class="project-filters" role="group" aria-label="Filter projects">{categories.map((category, index) => <button type="button" data-filter={index === 0 ? 'all' : category} aria-pressed={index === 0}>{category}</button>)}</div>
+  <p class="sr-only" id="project-status" role="status" aria-live="polite">{projects.length} projects</p>
+  <ProjectList projects={projects} />
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const projects = document.querySelectorAll<HTMLElement>('[data-category]');
+    buttons.forEach(button => button.addEventListener('click', () => {
+      buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+      let count = 0;
+      projects.forEach(project => { project.hidden = button.dataset.filter !== 'all' && project.dataset.category !== button.dataset.filter; if (!project.hidden) count++; });
+      const status = document.querySelector('#project-status');
+      if (status) status.textContent = `${count} ${count === 1 ? 'project' : 'projects'}`;
+    }));
+  </script>
+</Base>

@@ -1,0 +1,5 @@
+# Require direct and transitive package releases to be at least seven days old.
+minimumReleaseAge: 10080
+
+# Support the telemetry environment variables in scripts on every platform.
+shellEmulator: true

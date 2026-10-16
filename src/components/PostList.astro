@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import { formatDate, readingTime } from '../posts';
+interface Props { posts: CollectionEntry<'posts'>[]; searchable?: boolean }
+const { posts, searchable = false } = Astro.props;
+---
+<ul class="post-list">
+  {posts.map(post => (
+    <li class="post-item" data-search={searchable ? `${post.data.title} ${post.data.description} ${post.data.tags.join(' ')}`.toLowerCase() : undefined}>
+      <a class="post-link" href={post.data.permalink}>
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        <div class="post-summary">
+          <h3>{post.data.title}<Icon name="arrow" size={17} /></h3>
+          <p>{post.data.description}</p>
+          <span class="post-details">{post.data.tags[0]}<span aria-hidden="true">·</span>{readingTime(post)} min read</span>
+        </div>
+      </a>
+    </li>
+  ))}
+</ul>

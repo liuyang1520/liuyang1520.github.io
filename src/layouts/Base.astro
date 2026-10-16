@@ -1,0 +1,94 @@
+---
+import '@fontsource-variable/inter';
+import '../styles.css';
+import Icon from '../components/Icon.astro';
+import Brand from '../components/Brand.astro';
+import { profile } from '../data/profile';
+interface Props { title?: string; description?: string; active?: string; article?: boolean; published?: Date; noindex?: boolean }
+const { title, description = profile.description, active = 'Home', article = false, published, noindex = false } = Astro.props;
+const pageTitle = title ? `${title} — Marvin Liu` : 'Marvin Liu — Software engineer';
+const canonical = new URL(Astro.url.pathname.replace(/\.html\/$/, '.html'), Astro.site);
+const navigation = [{ name: 'Home', href: '/' }, { name: 'Writing', href: '/blog/' }, { name: 'Projects', href: '/projects/' }, { name: 'Resume', href: '/resume/' }];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f8f9f6" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <title>{pageTitle}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Marvin Liu — Writing" href="/feed.xml" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Marvin Liu" />
+    <meta property="og:image" content={new URL('/social-card.png', Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Marvin Liu — Writing and projects" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {published && <meta property="article:published_time" content={published.toISOString()} />}
+    <script is:inline>
+      (() => {
+        let theme;
+        try { theme = localStorage.getItem('theme'); } catch {}
+        const dark = theme === 'dark' || (theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        document.documentElement.classList.add('js');
+        document.querySelector('meta[name="theme-color"]').content = dark ? '#171916' : '#f8f9f6';
+      })();
+    </script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="header-identity">
+          <Brand />
+          <a class="header-profile" href="/about/">
+            <span>{profile.name}</span>
+          </a>
+        </div>
+        <nav aria-label="Main navigation">
+          {navigation.map(item => <a href={item.href} aria-current={active === item.name ? 'page' : undefined}>{item.name}</a>)}
+        </nav>
+        <button class="theme-toggle icon-button" type="button" aria-label="Switch to dark theme" title="Switch theme">
+          <Icon name="sun" class="sun-icon" size={19} /><Icon name="moon" class="moon-icon" size={19} />
+        </button>
+      </header>
+      <main id="main" tabindex="-1"><slot /></main>
+      <footer class="site-footer">
+        <div class="footer-top"><Brand small /><a class="back-to-top" href="#top" aria-label="Back to top" title="Back to top">↑</a></div>
+        <div class="footer-bottom"><span>© {new Date().getFullYear()} Marvin Liu</span><div><a href="/about/">About</a><a href={profile.github} target="_blank" rel="noreferrer">GitHub</a><a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a><a href="/feed.xml">RSS</a></div></div>
+      </footer>
+    </div>
+    <script>
+      const button = document.querySelector<HTMLButtonElement>('.theme-toggle');
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+      function applyTheme(theme: string) {
+        document.documentElement.dataset.theme = theme;
+        const label = `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`;
+        button?.setAttribute('aria-label', label);
+        button?.setAttribute('title', label);
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#171916' : '#f8f9f6');
+      }
+      applyTheme(document.documentElement.dataset.theme ?? 'light');
+      button?.addEventListener('click', () => {
+        const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        applyTheme(theme);
+        try { localStorage.setItem('theme', theme); } catch {}
+      });
+      systemTheme.addEventListener('change', event => {
+        try { if (localStorage.getItem('theme')) return; } catch {}
+        applyTheme(event.matches ? 'dark' : 'light');
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts } from '../posts';
+const posts = await getPosts();
+---
+<Base>
+  <header class="page-heading">
+    <h1>Recent writing<span class="title-period">.</span></h1>
+    <a class="text-link feed-link" href="/blog/">All writing<Icon name="arrow" size={15} /></a>
+  </header>
+  <PostList posts={posts.slice(0, 3)} />
+</Base>

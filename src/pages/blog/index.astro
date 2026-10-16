@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import Icon from '../../components/Icon.astro';
+import { getPosts } from '../../posts';
+const posts = await getPosts();
+const years = [...new Set(posts.map(post => post.data.date.getUTCFullYear()))];
+---
+<Base title="Writing" active="Writing" description="Notes on programming, practical solutions, and things learned along the way. The writing archive of Marvin Liu.">
+  <header class="page-heading"><h1>Writing<span class="title-period">.</span></h1><a class="text-link feed-link" href="/feed.xml"><Icon name="rss" size={15} />RSS<Icon name="external" size={13} /></a></header>
+  <div class="search-field"><Icon name="search" size={18} /><label class="sr-only" for="post-search">Search writing</label><input id="post-search" type="search" placeholder="Search writing…" autocomplete="off" /><kbd aria-hidden="true">/</kbd></div>
+  <p id="search-status" class="sr-only" role="status" aria-live="polite"></p>
+  <div class="writing-archive">
+    {years.map(year => <section class="year-group" aria-labelledby={`year-${year}`}><h2 class="year-label" id={`year-${year}`}>{year}</h2><PostList posts={posts.filter(post => post.data.date.getUTCFullYear() === year)} searchable /></section>)}
+  </div>
+  <div class="empty-state" hidden><Icon name="search" size={26} /><h2>No notes found.</h2><p>Try a title or topic, like “Python” or “iOS”.</p><button class="text-link" type="button" id="clear-search">Clear search<Icon name="arrow" size={15} /></button></div>
+  <script>
+    const search = document.querySelector<HTMLInputElement>('#post-search');
+    const entries = [...document.querySelectorAll<HTMLElement>('[data-search]')];
+    const empty = document.querySelector<HTMLElement>('.empty-state');
+    const status = document.querySelector('#search-status');
+    function filterPosts() {
+      const query = search?.value.toLowerCase().trim() ?? '';
+      let count = 0;
+      entries.forEach(entry => { entry.hidden = !entry.dataset.search?.includes(query); if (!entry.hidden) count++; });
+      document.querySelectorAll<HTMLElement>('.year-group').forEach(group => { group.hidden = !group.querySelector('.post-item:not([hidden])'); });
+      if (empty) empty.hidden = count > 0;
+      if (status) status.textContent = `${count} ${count === 1 ? 'post' : 'posts'} found`;
+    }
+    search?.addEventListener('input', filterPosts);
+    document.querySelector('#clear-search')?.addEventListener('click', () => { if (search) { search.value = ''; filterPosts(); search.focus(); } });
+    document.addEventListener('keydown', event => {
+      if (event.key === '/' && !event.metaKey && !event.ctrlKey && !event.altKey && !(event.target instanceof HTMLElement && (event.target.matches('input, textarea, select') || event.target.isContentEditable))) { event.preventDefault(); search?.focus(); }
+    });
+  </script>
+</Base>

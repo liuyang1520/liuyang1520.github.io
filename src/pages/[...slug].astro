@@ -1,0 +1,12 @@
+---
+import { getPosts } from '../posts';
+import Post from '../layouts/Post.astro';
+
+export async function getStaticPaths() {
+  return (await getPosts())
+    .filter(post => !post.data.permalink.endsWith('.html'))
+    .map(post => ({ params: { slug: post.data.permalink.replace(/^\/+|\/+$/g, '') }, props: { post } }));
+}
+const { post } = Astro.props;
+---
+<Post post={post} />

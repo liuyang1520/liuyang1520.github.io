@@ -1,0 +1,14 @@
+---
+import { experience } from '../data/profile';
+interface Props { limit?: number }
+const { limit = experience.length } = Astro.props;
+---
+<ul class="experience-list">
+  {experience.slice(0, limit).map(role => (
+    <li>
+      <span class="company-icon" aria-hidden="true"><img src={role.logo} width="40" height="40" alt="" loading="lazy" decoding="async" /></span>
+      <span class="company-name">{role.company}</span>
+      <span class="company-title">{role.title}</span>
+    </li>
+  ))}
+</ul>

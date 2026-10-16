@@ -1,0 +1,11 @@
+---
+interface Props { small?: boolean }
+const { small = false } = Astro.props;
+---
+<a class:list={['brand', { 'brand-small': small }]} href="/" aria-label="Marvin Liu home">
+  <svg width="44" height="44" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <rect class="brand-tile" x="1" y="1" width="62" height="62" rx="19" />
+    <path class="brand-line" d="M15 43V23L26 35L37 23V43H49" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path class="brand-fold" d="M45 19L49 23L45 27L41 23Z" />
+  </svg>
+</a>
