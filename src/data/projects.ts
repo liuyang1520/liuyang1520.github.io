@@ -80,6 +80,15 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    name: 'Sail',
+    description: 'A real-time sailing simulation set on the real Earth.',
+    category: 'Games',
+    technology: 'Game · Website',
+    icon: 'sail',
+    logo: '/logos/sail.png',
+    url: 'https://liuyang1520.github.io/sail-sim-site/',
+  },
+  {
     name: 'ma',
     repository: 'ma',
     description: 'A terminal Markdown reader with proportional type and a native Go rendering engine.',
@@ -104,15 +113,5 @@ export const projects: Project[] = [
     category: 'Developer tools',
     technology: 'Python · llama.cpp',
     icon: 'spark',
-  },
-  {
-    name: 'Sail',
-    repository: 'sail-sim-site',
-    description: 'A real-time sailing simulation set on the real Earth.',
-    category: 'Games',
-    technology: 'Game · Website',
-    icon: 'sail',
-    logo: '/logos/sail.png',
-    url: 'https://liuyang1520.github.io/sail-sim-site/',
   },
 ];
