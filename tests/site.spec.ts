@@ -61,7 +61,7 @@ test('project filters show the correct projects and source links', async ({ page
   await expect(page.locator('.project-item:visible')).toHaveCount(2);
   await page.getByRole('button', { name: 'Apps', exact: true }).click();
   await expect(page.locator('.project-item:visible')).toHaveCount(7);
-  await expect(page.getByRole('link', { name: 'Kotoba source on GitHub' })).toHaveAttribute('href', 'https://github.com/liuyang1520/vocabulary-practice');
+  await expect(page.getByRole('link', { name: 'Kotoba source on GitHub' })).toHaveAttribute('href', 'https://github.com/liuyang1520/kotoba');
   await page.getByRole('button', { name: 'All projects', exact: true }).click();
   await expect(page.locator('.project-item:visible')).toHaveCount(11);
   for (const [name, url] of [
@@ -69,6 +69,7 @@ test('project filters show the correct projects and source links', async ({ page
     ['DouJiao', 'https://doujiao.cloud.run/'],
     ['vatlas', 'https://vatlas.cloud.run/'],
     ['Simple Hotkeys', 'https://github.com/liuyang1520/simple-hotkeys'],
+    ['Kotoba', 'https://liuyang1520.github.io/kotoba/'],
     ['Road Test Sim', 'https://inquisitive-llama-29e477.netlify.app/'],
   ]) {
     await expect(page.getByRole('heading', { name, exact: true }).getByRole('link')).toHaveAttribute('href', url);

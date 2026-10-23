@@ -70,13 +70,13 @@ export const projects: Project[] = [
   },
   {
     name: 'Kotoba',
-    repository: 'vocabulary-practice',
+    repository: 'kotoba',
     description: 'Japanese vocabulary flashcards and quizzes with progress saved in your browser.',
     category: 'Apps',
     technology: 'TypeScript · React',
     icon: 'book',
     logo: '/logos/kotoba.svg',
-    url: 'https://liuyang1520.github.io/vocabulary-practice/',
+    url: 'https://liuyang1520.github.io/kotoba/',
     featured: true,
   },
   {

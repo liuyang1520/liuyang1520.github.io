@@ -10,7 +10,7 @@ Logos are stored locally so the site makes no third-party image requests. Brand 
 | `cisco.svg` | Header logo extracted from [Cisco's home page](https://www.cisco.com/) |
 | `splice.png` | [SPLICE Software's chevron](https://www.splicesoftware.com/hubfs/Logos/SPLICE%20Logo%20Files/SPLICE%20Chevron%20Only.png) |
 | `routinely.svg` | [Routinely — public/icon.svg](https://github.com/liuyang1520/routinely/blob/HEAD/public/icon.svg) |
-| `kotoba.svg` | [Kotoba — public/favicon.svg](https://github.com/liuyang1520/vocabulary-practice/blob/HEAD/public/favicon.svg) |
+| `kotoba.svg` | [Kotoba — public/favicon.svg](https://github.com/liuyang1520/kotoba/blob/HEAD/public/favicon.svg) |
 | `gesture-control.png` | [Gesture Control's app icon](https://github.com/liuyang1520/gesture-control/tree/HEAD/gesture-control/Assets.xcassets/AppIcon.appiconset), 256 px version |
 | `sail.png` | [Sail's app icon](https://github.com/liuyang1520/sail-sim-site/blob/HEAD/assets/icon-1024.png), resized to 256 px |
 | `nimue.svg` | [Nimue's favicon](https://nimue.quest/favicon.svg), from the project's `public/favicon.svg` |
